@@ -16,12 +16,7 @@ app.post("/", function(req,res) {
   https.get(url, function(response) {
     response.on("data", function(data) {
       const weatherData = JSON.parse(data);
-      res.sendFile(__dirname+"/response.html", {city:city}, {temp:weatherData.main.temp},{wDescp:weatherData.weather[0].description});
-      // res.write("<h1>The temperature of "+city+" is : "+weatherData.main.temp+" deg C</h1>");
-      // res.write("<h2>The Weather Description is : "+weatherData.weather[0].description+"</h2>");
-      // var picUrl = "http://openweathermap.org/img/wn/"+weatherData.weather[0].icon+"@2x.png";
-      // res.write("<img src="+picUrl+">");
-      // res.send();
+      res.sendFile(__dirname+"/response.html");
     })
   })
 });
