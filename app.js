@@ -3,6 +3,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const https = require("https");
 
+app.set('view engine','ejs');
+
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -16,7 +18,9 @@ app.post("/", function(req,res) {
   https.get(url, function(response) {
     response.on("data", function(data) {
       const weatherData = JSON.parse(data);
-      res.sendFile(__dirname+"/response.html");
+      var temper = weatherData.main.temp;
+      var weaDesc = weatherData.weather[0].description;
+      res.render("response", {temp: temper, wd: weaDesc});
     })
   })
 });
